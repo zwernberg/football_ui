@@ -1,44 +1,35 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
+import { useRoutes } from 'hookrouter';
+import { Menu } from 'semantic-ui-react'
+import Routes from './router'
 
-import Division from './components/division';
-import { Divider } from 'semantic-ui-react'
-
-import logo from './logo.svg';
 import './App.css';
 const App = () => {
-  const [data, setData] = useState({});
+
+  const routeResult = useRoutes(Routes)
+  const [active, setActive] = useState('scoreboard');
+
+  const handleItemClick = (e, { name }) => setActive(name);
 
 
-  useEffect(() => {
-    const fetchData = async () => {
-      const result = await fetch(
-        'https://schumacher.football/api/standings',
-      );
-
-      setData(await result.json());
-    };
-    fetchData();
-  }, []);
-
-  if (!data.divisions) {
-    return null;
-  }
   return (
     <div className="App">
-      <header className="App-header">
-        {
-          data.divisions.map((division, index) => {
-            return (
-            <>
-              <Division {...division} />
-              <Divider />
-            </>
-            )
-          })
-        }
-      </header>
+      {/* <A href="/scoreboard">Scoreboard</A><br />
+      <A href="/standings">Standings</A> */}
+
+      <Menu fixed='top' pointing>
+      <Menu.Item>
+          Schumacher Football
+        </Menu.Item>
+      <Menu.Item href="/scoreboard" as='A'>Scoreboard</Menu.Item>
+      <Menu.Item href="/standings" as='A'>Standings</Menu.Item>
+      </Menu>
+      <br />
+      <br />
+      <br />
+      {routeResult}
     </div>
-  );
-}
+  )
+};
 
 export default App;

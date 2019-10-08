@@ -6,7 +6,7 @@ const Team = (props) => {
   return (
     <Table.Row>
     <Table.Cell>
-      {playoffSeed}
+      <Label ribbon>{playoffSeed}</Label>
     </Table.Cell>
     <Table.Cell>{name}</Table.Cell>
     <Table.Cell>{primaryOwner}</Table.Cell>
